@@ -1,20 +1,21 @@
 package com.example.games_r_us.model
 
-data class Game(
-    private val id: Int,
-    private val title: String,
-    private val thumbnail: String,
-    private val description: String,
+import com.google.gson.annotations.SerializedName
 
-//    "id": 1,
-//    "title": "Dauntless",
-//"thumbnail": "https://www.freetogame.com/g/1/thumbnail.jpg",
-//"short_description": "A free-to-play, co-op action RPG with gameplay similar to Monster Hunter.",
-//"game_url": "https://www.freetogame.com/open/dauntless",
-//"genre": "MMORPG",
-//"platform": "PC (Windows)",
-//"publisher": "Phoenix Labs",
-//"developer": "Phoenix Labs, Iron Galaxy",
-//"release_date": "2019-05-21",
-//"freetogame_profile_url": "https://www.freetogame.com/dauntless"
-) {}
+data class Game(
+    val id: Int,
+    val title: String,
+    val thumbnail: String,
+    @SerializedName("short_description")
+    val description: String,
+    @SerializedName("game_url")
+    val gameUrl: String,
+    val genre: String,
+    val platform: String,
+    val publisher: String,
+    val developer: String,
+    @SerializedName("release_date")
+    val releaseDate: String,
+    @SerializedName("freetogame_profile_url")
+    val profileUrl: String
+)
