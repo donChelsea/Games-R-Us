@@ -1,38 +1,48 @@
 package com.example.games_r_us
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.games_r_us.model.Game
-import com.example.games_r_us.network.GameService.gameService
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
+import com.example.games_r_us.databinding.ActivityMainBinding
+import com.example.games_r_us.explore.ExploreFragment
 
 class MainActivity : AppCompatActivity() {
-    private val TAG = "MainActivity"
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
+
+    private val homeFragment = HomeFragment()
+    private val exploreFragment = ExploreFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        GlobalScope.launch(Dispatchers.IO) {
-            val response = gameService.getAllGames()
-            withContext(Dispatchers.Main) {
-                if (response.isSuccessful && response.body() != null) {
-                    Log.d(TAG, "games: ${response.body()?.size}")
-                } else {
-                    throw Exception(response.message())
-                }
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
+        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
+
+        setCurrentFragment(exploreFragment)
+
+        binding.bottomNavigationView.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.homeFragment -> setCurrentFragment(homeFragment)
+                R.id.exploreFragment -> setCurrentFragment(exploreFragment)
+//                R.id.accountFragment -> setCurrentFragment(settingsFragment)
             }
+            true
         }
-
     }
 
+    private fun setCurrentFragment(fragment: Fragment) =
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.nav_host_fragment, fragment)
+            addToBackStack("main")
+            commit()
+        }
 
 }
