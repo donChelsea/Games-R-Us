@@ -11,7 +11,7 @@
         <entry key="app/src/main/res/layout/fragment_explore.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1818642350557244" />
         <entry key="app/src/main/res/layout/list_item_view.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/platform_item_view.xml" value="0.10280797101449275" />
+        <entry key="app/src/main/res/layout/platform_item_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/search_type_item_view.xml" value="0.25" />
         <entry key="app/src/main/res/menu/bottom_nav.xml" value="0.1" />
         <entry key="app/src/main/res/menu/menu_search.xml" value="0.1" />

@@ -3,17 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="15dp">
+    android:layout_marginStart="28dp"
+    android:layout_marginEnd="28dp"
+    android:layout_marginBottom="20dp"
+    android:layout_marginTop="16dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/platform_name"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:text="@string/platform"
+            android:id="@+id/game_genre"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:text="Game Genre"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:textSize="18sp"

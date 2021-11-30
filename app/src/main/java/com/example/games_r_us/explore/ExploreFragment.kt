@@ -14,7 +14,10 @@ import android.widget.Toast
 import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.SearchView
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.games_r_us.model.Game
+import kotlin.math.sign
 
 class ExploreFragment : Fragment() {
     private lateinit var binding: FragmentExploreBinding
@@ -33,27 +36,32 @@ class ExploreFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         viewModel.allGames.observe(viewLifecycleOwner, Observer { games ->
-            val platforms = viewModel.getPlatforms(games)
+            val genres = viewModel.getGenres(games)
 
-            val gameAdapter: ArrayAdapter<String> = ArrayAdapter(requireContext(), R.layout.list_item_view, platforms)
-            binding.listview.adapter = gameAdapter
-            binding.searchview.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
-                androidx.appcompat.widget.SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(p0: String?): Boolean {
-                    binding.searchview.clearFocus()
-                    if (platforms.contains(p0)) {
-                        gameAdapter.filter.filter(p0)
-                    }
-                    return false
-                }
+            binding.apply {
+                genreRecyclerview.adapter = GenreAdapter(genres)
+                genreRecyclerview.layoutManager = GridLayoutManager(requireContext(), 2)
+            }
 
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    gameAdapter.filter.filter(newText)
-                    return false
-                }
-            })
+
+//            val gameAdapter: ArrayAdapter<String> = ArrayAdapter(requireContext(), R.layout.list_item_view, genres)
+//            binding.listview.adapter = gameAdapter
+//            binding.searchview.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+//                androidx.appcompat.widget.SearchView.OnQueryTextListener {
+//                override fun onQueryTextSubmit(p0: String?): Boolean {
+//                    binding.searchview.clearFocus()
+//                    if (genres.contains(p0)) {
+//                        gameAdapter.filter.filter(p0)
+//                    }
+//                    return false
+//                }
+//
+//                override fun onQueryTextChange(newText: String?): Boolean {
+//                    gameAdapter.filter.filter(newText)
+//                    return false
+//                }
+//            })
 
         })
 

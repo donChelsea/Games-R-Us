@@ -14,17 +14,32 @@
         app:queryHint="Search"
         android:background="@color/design_default_color_secondary_variant"/>
 
-
-    <ListView
-        android:id="@+id/listview"
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/searchview"/>
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/platform_recyclerview"-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.92" />
+
+<!--    <ListView-->
+<!--        android:id="@+id/listview"-->
 <!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="100dp"-->
+<!--        android:layout_height="wrap_content"-->
 <!--        app:layout_constraintTop_toBottomOf="@id/searchview"/>-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/genre_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/searchview"
+        tools:listitem="@layout/genre_item_view"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

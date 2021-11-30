@@ -16,6 +16,7 @@ class ExploreViewModel : ViewModel() {
 
     private val TAG = "ExploreViewModel"
     val platformSet = mutableSetOf<String>()
+    val genreSet = mutableSetOf<String>()
 
     suspend fun getAllGames() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -33,9 +34,18 @@ class ExploreViewModel : ViewModel() {
     fun getPlatforms(games: List<Game>): List<String> {
         games.forEach { game ->
             if (!platformSet.contains(game.platform)) {
-                platformSet.add(game.platform)
+                platformSet.add(game.platform.trim())
             }
         }
         return platformSet.toList()
+    }
+
+    fun getGenres(games: List<Game>): List<String> {
+        games.forEach { game ->
+            if (!genreSet.contains(game.genre)) {
+                genreSet.add(game.genre.trim())
+            }
+        }
+        return genreSet.toList()
     }
 }
