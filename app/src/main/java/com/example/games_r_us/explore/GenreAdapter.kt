@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.games_r_us.databinding.GenreItemViewBinding
 
-class GenreAdapter(private val genres: List<String>): RecyclerView.Adapter<GenreAdapter.GenreViewHolder>() {
+class GenreAdapter(private val genres: List<String>, private val clickListener: (String) -> Unit): RecyclerView.Adapter<GenreAdapter.GenreViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenreViewHolder {
         return GenreViewHolder(
@@ -25,9 +25,11 @@ class GenreAdapter(private val genres: List<String>): RecyclerView.Adapter<Genre
 
     inner class GenreViewHolder(private val binding: GenreItemViewBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(game: String) {
+        fun bind(genre: String) {
+            itemView.setOnClickListener { clickListener(genre) }
+
             binding.apply {
-                gameGenre.text = game
+                gameGenre.text = genre
             }
         }
     }

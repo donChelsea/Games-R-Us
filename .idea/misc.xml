@@ -9,7 +9,9 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/coin_item_view.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_explore.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_games.xml" value="0.20742753623188406" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1818642350557244" />
+        <entry key="app/src/main/res/layout/game_item_view.xml" value="0.20742753623188406" />
         <entry key="app/src/main/res/layout/list_item_view.xml" value="0.1" />
         <entry key="app/src/main/res/layout/platform_item_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/search_type_item_view.xml" value="0.25" />

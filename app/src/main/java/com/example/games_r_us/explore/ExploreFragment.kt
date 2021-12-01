@@ -4,20 +4,14 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.example.games_r_us.R
 import com.example.games_r_us.databinding.FragmentExploreBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
 import android.view.*
-import android.widget.ArrayAdapter
-import android.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.games_r_us.model.Game
-import kotlin.math.sign
+import com.example.games_r_us.R
 
 class ExploreFragment : Fragment() {
     private lateinit var binding: FragmentExploreBinding
@@ -40,13 +34,10 @@ class ExploreFragment : Fragment() {
             val genres = viewModel.getGenres(games)
 
             binding.apply {
-                genreRecyclerview.adapter = GenreAdapter(genres)
+                genreRecyclerview.adapter = GenreAdapter(genres, { genre -> onGenreClicked(genre) })
                 genreRecyclerview.layoutManager = GridLayoutManager(requireContext(), 2)
             }
 
-
-//            val gameAdapter: ArrayAdapter<String> = ArrayAdapter(requireContext(), R.layout.list_item_view, genres)
-//            binding.listview.adapter = gameAdapter
 //            binding.searchview.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
 //                androidx.appcompat.widget.SearchView.OnQueryTextListener {
 //                override fun onQueryTextSubmit(p0: String?): Boolean {
@@ -68,6 +59,14 @@ class ExploreFragment : Fragment() {
         GlobalScope.launch(Dispatchers.Main) {
             viewModel.getAllGames()
         }
+    }
+
+    private fun onGenreClicked(genre: String) {
+        val gamesFragment = GamesFragment.newInstance(genre)
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.nav_host_fragment, gamesFragment)
+            .addToBackStack("games")
+            .commit()
     }
 
 }
