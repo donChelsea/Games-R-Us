@@ -8,10 +8,10 @@ import com.example.games_r_us.databinding.FragmentExploreBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import android.widget.Toast
 import android.view.*
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.games_r_us.R
+import com.example.games_r_us.explore.gamesbygenre.GamesByGenreFragment
 
 class ExploreFragment : Fragment() {
     private lateinit var binding: FragmentExploreBinding
@@ -29,14 +29,12 @@ class ExploreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val genres = viewModel.getGenres()
 
-        viewModel.allGames.observe(viewLifecycleOwner, Observer { games ->
-            val genres = viewModel.getGenres(games)
-
-            binding.apply {
-                genreRecyclerview.adapter = GenreAdapter(genres, { genre -> onGenreClicked(genre) })
-                genreRecyclerview.layoutManager = GridLayoutManager(requireContext(), 2)
-            }
+        binding.apply {
+            genreRecyclerview.adapter = GenreAdapter(genres, { genre -> onGenreClicked(genre) })
+            genreRecyclerview.layoutManager = GridLayoutManager(requireContext(), 2)
+        }
 
 //            binding.searchview.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
 //                androidx.appcompat.widget.SearchView.OnQueryTextListener {
@@ -53,16 +51,10 @@ class ExploreFragment : Fragment() {
 //                    return false
 //                }
 //            })
-
-        })
-
-        GlobalScope.launch(Dispatchers.Main) {
-            viewModel.getAllGames()
-        }
     }
 
     private fun onGenreClicked(genre: String) {
-        val gamesFragment = GamesFragment.newInstance(genre)
+        val gamesFragment = GamesByGenreFragment.newInstance(genre)
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.nav_host_fragment, gamesFragment)
             .addToBackStack("games")

@@ -7,7 +7,7 @@ import retrofit2.create
 object GameService {
     private const val BASE_URL = "https://www.freetogame.com/"
 
-    val gameService = Retrofit.Builder()
+    val gameService: GameApi = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()

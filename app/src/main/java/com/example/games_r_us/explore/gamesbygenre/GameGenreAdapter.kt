@@ -1,17 +1,17 @@
-package com.example.games_r_us.explore
+package com.example.games_r_us.explore.gamesbygenre
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.games_r_us.databinding.GameItemViewBinding
+import com.example.games_r_us.databinding.GameGenreItemViewBinding
 import com.example.games_r_us.model.Game
 import com.squareup.picasso.Picasso
 
-class GameAdapter(private val games: List<Game>): RecyclerView.Adapter<GameAdapter.GameViewHolder>() {
+class GameGenreAdapter(private val games: List<Game>): RecyclerView.Adapter<GameGenreAdapter.GameGenreViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
-        return GameViewHolder(
-            GameItemViewBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameGenreViewHolder {
+        return GameGenreViewHolder(
+            GameGenreItemViewBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -19,13 +19,13 @@ class GameAdapter(private val games: List<Game>): RecyclerView.Adapter<GameAdapt
         )
     }
 
-    override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: GameGenreViewHolder, position: Int) {
         holder.bind(games[position])
     }
 
     override fun getItemCount() = games.size
 
-    inner class GameViewHolder(private val binding: GameItemViewBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class GameGenreViewHolder(private val binding: GameGenreItemViewBinding): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(game: Game) {
             binding.apply {
