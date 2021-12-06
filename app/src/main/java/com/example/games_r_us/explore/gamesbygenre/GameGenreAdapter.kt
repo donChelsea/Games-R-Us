@@ -7,7 +7,7 @@ import com.example.games_r_us.databinding.GameGenreItemViewBinding
 import com.example.games_r_us.model.Game
 import com.squareup.picasso.Picasso
 
-class GameGenreAdapter(private val games: List<Game>): RecyclerView.Adapter<GameGenreAdapter.GameGenreViewHolder>() {
+class GameGenreAdapter(private val games: List<Game>, private val clickListener: (Game) -> Unit): RecyclerView.Adapter<GameGenreAdapter.GameGenreViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameGenreViewHolder {
         return GameGenreViewHolder(
@@ -28,6 +28,8 @@ class GameGenreAdapter(private val games: List<Game>): RecyclerView.Adapter<Game
     inner class GameGenreViewHolder(private val binding: GameGenreItemViewBinding): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(game: Game) {
+            itemView.setOnClickListener { clickListener(game) }
+
             binding.apply {
                 gameTitle.text = game.title
                 Picasso.get().load(game.thumbnail).into(gameImage)
