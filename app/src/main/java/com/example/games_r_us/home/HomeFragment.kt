@@ -1,4 +1,4 @@
-package com.example.games_r_us
+package com.example.games_r_us.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
