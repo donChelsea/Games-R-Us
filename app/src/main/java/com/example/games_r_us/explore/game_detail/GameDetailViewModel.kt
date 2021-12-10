@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.games_r_us.Utils
 import com.example.games_r_us.model.GameDetail
 import com.example.games_r_us.network.GameService
 import kotlinx.coroutines.Dispatchers
@@ -27,6 +28,10 @@ class GameDetailViewModel: ViewModel() {
                 }
             }
         }
+    }
+
+    fun getPlatformIcon(platform: String): Int {
+       return Utils.getPlatformIcon(platform)
     }
 
 }

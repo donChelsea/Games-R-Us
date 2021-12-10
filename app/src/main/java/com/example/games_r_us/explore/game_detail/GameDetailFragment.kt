@@ -15,8 +15,10 @@ import com.example.games_r_us.databinding.FragmentGamesByGenreBinding
 import com.example.games_r_us.explore.gamesbygenre.GamesByGenreFragment
 import com.example.games_r_us.explore.gamesbygenre.GamesByGenreViewModel
 import com.example.games_r_us.model.Game
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import me.relex.circleindicator.CircleIndicator3
 
 class GameDetailFragment : Fragment() {
     private val viewModel: GameDetailViewModel by viewModels()
@@ -44,6 +46,19 @@ class GameDetailFragment : Fragment() {
 
         viewModel.game.observe(viewLifecycleOwner, Observer { game ->
             Log.d(TAG, "game: ${game.title}")
+
+            binding.apply {
+                gameScreenshotsViewPager.adapter = ScreenshotAdapter(game.screenshots)
+                indicator.setViewPager(gameScreenshotsViewPager)
+
+                Picasso.get().load(game.thumbnail).into(ivThumbnail)
+                Picasso.get().load(viewModel.getPlatformIcon(game.platform)).into(ivPlatformIcon)
+                tvGameTitle.text = game.title
+                tvGameDescription.text = game.descriptionLong
+                tvCategory.text = game.genre
+
+            }
+
         })
 
         GlobalScope.launch {

@@ -7,7 +7,9 @@ data class Game(
     val title: String,
     val thumbnail: String,
     @SerializedName("short_description")
-    val description: String,
+    val descriptionShort: String,
+    @SerializedName("description")
+    val descriptionLong: String,
     @SerializedName("game_url")
     val gameUrl: String,
     val genre: String,
@@ -25,7 +27,9 @@ data class GameDetail(
     val title: String,
     val thumbnail: String,
     @SerializedName("short_description")
-    val description: String,
+    val descriptionShort: String,
+    @SerializedName("description")
+    val descriptionLong: String,
     @SerializedName("game_url")
     val gameUrl: String,
     val genre: String,
