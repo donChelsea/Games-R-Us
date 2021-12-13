@@ -5,6 +5,4 @@
     <string name="explore">Explore</string>
     <string name="account">Account</string>
     <string name="platform">Platform</string>
-    <string name="signOut">Sign Out</string>
-    <string name="signInSignUp">Sign In / Sign Up</string>
 </resources>

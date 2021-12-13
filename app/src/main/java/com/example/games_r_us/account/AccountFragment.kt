@@ -30,26 +30,33 @@ class AccountFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
+        binding.apply {
+            tvSignOut.setOnClickListener {
+                auth.signOut()
+                layoutSignedOut.visibility = View.VISIBLE
+                layoutSignedIn.visibility = View.GONE
+            }
+
+            btnCreateAccount.setOnClickListener {
+                val intent = Intent(requireContext(), SignInActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
         checkIfUserIsLoggedIn()
     }
 
     private fun checkIfUserIsLoggedIn() {
         if (auth.currentUser != null) {
             binding.apply {
-                tvSignUp.text = resources.getString(R.string.signOut)
-                tvSignUp.setOnClickListener { signOut() }
+                layoutSignedIn.visibility = View.VISIBLE
+                layoutSignedOut.visibility = View.GONE
             }
         } else {
-            binding.tvSignUp.setOnClickListener {
-                val intent = Intent(requireContext(), SignInActivity::class.java)
-                startActivity(intent)
+            binding.apply {
+                layoutSignedOut.visibility = View.VISIBLE
+                layoutSignedIn.visibility = View.GONE
             }
         }
     }
-
-    private fun signOut() {
-        auth.signOut()
-        binding.tvSignUp.text = resources.getString(R.string.signInSignUp)
-    }
-
 }

@@ -26,6 +26,7 @@
         <entry key="app/src/main/res/layout/platform_item_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/screenshot_item_view.xml" value="0.15374873353596757" />
         <entry key="app/src/main/res/layout/search_type_item_view.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/tester_layout.xml" value="0.25" />
         <entry key="app/src/main/res/menu/bottom_nav.xml" value="0.1" />
         <entry key="app/src/main/res/menu/menu_search.xml" value="0.1" />
       </map>
