@@ -9,7 +9,6 @@
         android:id="@+id/layout_signed_in"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
         tools:context=".account.AccountFragment">
 
         <ImageView
@@ -120,7 +119,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/layout_signed_out"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/tv_create_account"

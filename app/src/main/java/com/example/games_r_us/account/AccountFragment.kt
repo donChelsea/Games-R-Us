@@ -31,6 +31,8 @@ class AccountFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
 
         binding.apply {
+            tvFName.text = auth.currentUser?.displayName
+
             tvSignOut.setOnClickListener {
                 auth.signOut()
                 layoutSignedOut.visibility = View.VISIBLE
