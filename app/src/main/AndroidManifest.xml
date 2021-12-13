@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Games_R_Us">
         <activity
+            android:name=".account.authentication.RegisterActivity"
+            android:exported="false" />
+        <activity
             android:name=".account.authentication.SignInActivity"
             android:exported="false" />
         <activity
