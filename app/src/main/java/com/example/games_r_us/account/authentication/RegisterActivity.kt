@@ -4,13 +4,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.games_r_us.FirebaseUtils.auth
 import com.example.games_r_us.databinding.ActivityRegisterBinding
 import com.example.games_r_us.model.User
 import com.google.firebase.auth.FirebaseAuth
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
-    private lateinit var auth: FirebaseAuth
 
     private val TAG = "RegisterActivity"
 
@@ -18,8 +18,6 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        auth = FirebaseAuth.getInstance()
 
         binding.apply {
 

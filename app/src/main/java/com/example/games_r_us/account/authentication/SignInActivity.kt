@@ -5,20 +5,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.example.games_r_us.FirebaseUtils.auth
+import com.example.games_r_us.FirebaseUtils.database
 import com.example.games_r_us.MainActivity
 import com.example.games_r_us.account.authentication.RegisterActivity.Companion.ARG_USER
 import com.example.games_r_us.databinding.ActivitySignInBinding
 import com.example.games_r_us.model.User
-import com.google.firebase.auth.FirebaseAuth
+import com.example.games_r_us.model.UserData
 
 import com.google.firebase.auth.UserProfileChangeRequest
 
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.FirebaseUser
-
 class SignInActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignInBinding
-    private lateinit var auth: FirebaseAuth
 
     private val TAG = "SignInActivity"
 
@@ -26,8 +24,6 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        auth = FirebaseAuth.getInstance()
 
         binding.apply {
             tvRegister.setOnClickListener {
@@ -48,7 +44,7 @@ class SignInActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
-                    updateUserProfile()
+                    createUserInDatabase()
                     val intent = Intent(this@SignInActivity, MainActivity::class.java)
                     startActivity(intent)
                 }
@@ -58,11 +54,13 @@ class SignInActivity : AppCompatActivity() {
             }
     }
 
-    private fun updateUserProfile() {
+    private fun createUserInDatabase() {
         if (intent.extras != null) {
             val bundle = intent.extras
             val userInfo = bundle?.get(ARG_USER) as User
             val user = auth.currentUser
+
+            user?.let { writeNewUser(it.uid) }
 
             val profileUpdates = UserProfileChangeRequest.Builder()
                 .setDisplayName("${userInfo.firstName} ${userInfo.lastName}")
@@ -77,4 +75,11 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
+    private fun getUserData() {}
+
+    fun writeNewUser(userId: String) {
+        val userData = UserData(userId, listOf(), listOf(), listOf())
+
+        database.reference.child("users").child(userId).setValue(userData)
+    }
 }
